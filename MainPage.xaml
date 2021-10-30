@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="HaloWaypoint.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <CollectionViewSource x:Name="news" IsSourceGrouped="True" ItemsPath="NewsPosts"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="Header" Height="75" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Image Source="/Assets/Halo_Waypoint_logo.svg.png" HorizontalAlignment="Left" Margin="10"></Image>
+        </Grid>
+        <GridView ItemsSource="{Binding Source={StaticResource news}}" MaxHeight="500" Width="600" HorizontalAlignment="Left">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="3"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="20">
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold"
+                                   Style="{StaticResource HeaderTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Type}" FontWeight="ExtraLight" 
+                                   Style="{StaticResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Author}" FontWeight="ExtraLight" 
+                                   Style="{StaticResource BaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding DatePosted}" TextWrapping="NoWrap" Margin="0,0,0,15"
+                                   Style="{StaticResource BodyTextBlockStyle}" />
+                                <Image Source='{Binding Thumbnail}'/>
+                                <TextBlock Text='{Binding Text}' FontWeight="Light" Style="{StaticResource BaseTextBlockStyle}" 
+                                           TextWrapping="Wrap" MaxWidth="500" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
+        </GridView>
+    </Grid>
+</Page>
